@@ -28,9 +28,9 @@ async def coin_flip(ctx):
 async def heh(ctx, count_heh = 5):
     await ctx.send("he" * count_heh)
 
-#@bot.command()
-#async def online(ctx):
-    #online_members = sum(member.status == discord.Status.online for member in ctx.guild.members)
-    #await ctx.send("Online: " + online_members)
+@bot.command()
+async def online(ctx):
+    online_count = len([member for member in ctx.guild.members if member.status != discord.Status.offline])
+    await ctx.send(f'Members online: {online_count}')
 
 bot.run(settings)
