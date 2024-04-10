@@ -1,7 +1,10 @@
 import discord
 from discord.ext import commands
 from settings import settings
-from bot_logic import gen_pass, Coin
+from bot_logic import *
+import os
+from images import *
+from meme import *
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -29,8 +32,23 @@ async def heh(ctx, count_heh = 5):
     await ctx.send("he" * count_heh)
 
 @bot.command()
-async def online(ctx):
-    online_count = len([member for member in ctx.guild.members if member.status != discord.Status.offline])
-    await ctx.send(f'Members online: {online_count}')
+async def image(ctx):
+    images = os.listdir('images')
+    print(images)
+    img_name = random.choice(images)
+    with open(f'images/{img_name}', 'rb') as f:
+        picture = discord.File(f)
+    await ctx.send(file=picture)
+
+@bot.command('duck')
+async def duck(ctx):
+    image_url = get_duck_image_url()
+    await ctx.send(image_url)
+
+@bot.command('meme')
+async def meme(ctx):
+    with open("meme/meme.jpg", "r") as file:
+        meme = file.read()
+    await ctx.send(file=meme)
 
 bot.run(settings)
