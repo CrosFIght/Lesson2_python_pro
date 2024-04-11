@@ -15,23 +15,23 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 async def on_ready():
     print(f'We logged in as {bot.user}')
 
-@bot.command()
+@bot.command('hello')
 async def hello(ctx):
     await ctx.send("Hello, human being! How nice of you to contact me. What can I do for you today?")
 
-@bot.command()
+@bot.command('password')
 async def password(ctx):
     await ctx.send(f'Your password: \n||{gen_pass(10)}||')
 
-@bot.command()
+@bot.command('coin_flip')
 async def coin_flip(ctx):
     await ctx.send(f'Side of a coin: \n{Coin()}')
 
-@bot.command()
+@bot.command('heh')
 async def heh(ctx, count_heh = 5):
     await ctx.send("he" * count_heh)
 
-@bot.command()
+@bot.command('image')
 async def image(ctx):
     images = os.listdir('images')
     print(images)
